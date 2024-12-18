@@ -16,8 +16,8 @@ export default function EditContact() {
     const queryClient = useQueryClient()
     const navigate= useNavigate();
 
-    const {mutateAsync, isLoading: isSubmitting} = useContactMutation(contactId);
-    const {mutateAsync: deleteMutation, isLoading: isDeleting} = useDeleteContactMutation(contactId);
+    const {mutateAsync, isPending: isSubmitting} = useContactMutation(contactId);
+    const {mutateAsync: deleteMutation, isPending: isDeleting} = useDeleteContactMutation(contactId);
     const {data: contact, isLoading, isFetching, isPending} = useContactQuery(contactId);
 
     if (isFetching || isLoading) {
@@ -87,7 +87,8 @@ export default function EditContact() {
                                     contact && <div>
                                         <button
                                             type="button"
-                                            className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                                            disabled={isDeleting}
+                                            className={`rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 ${isDeleting && 'opacity-50 cursor-not-allowed'}`}
                                             onClick={deleteContact}
                                         >
                                             Delete
@@ -178,9 +179,8 @@ export default function EditContact() {
 
                         <button
                             type="submit"
-                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                            // disabled={isSubmitting}
-                            // className={isSubmitting && "disabled"}
+                            className={`rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${isSubmitting && 'opacity-50 cursor-not-allowed'}`}
+                            disabled={isSubmitting}
                         >
                             Save
                         </button>

@@ -23,7 +23,9 @@ class ContactApiController extends Controller
      */
     public function store(StoreContactRequest $request)
     {
-        // store it for the current authenticated user
+        // purposely sleep for 20 seconds per the requirement
+        sleep(20);
+
         return $request->user()->contacts()->create($request->validated());
     }
 
