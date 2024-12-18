@@ -3,7 +3,7 @@ const FullPaneLoader = () => (
         <img
             className="h-80 w-80 m-auto animate-spin"
             src={`/storage/unsplash-splash-img.jpg`}
-            alt="SiteDetour Logo"
+            alt="Knot Logo"
         />
     </div>
 );
